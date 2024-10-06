@@ -8,12 +8,12 @@
     </head>
 
     <body>
-        <div x-data="Data()">
+        <div x-data="Data()" x-init="init">
             <h1 x-text="Title"></h1>
             <h4 x-text="Content"></h4>
             <h5 x-html="XSS"></h5>
             <button @click="Refresh()">點我刷新</button>
-            <span @left="Left()">按左方Alert</span>
+            <span @keydown.left="Left()">按左方Alert</span>
             <div :style="Blue">我是藍色</div>
             <div x-show="Show">預設顯示</div>
         </div>
