@@ -8,7 +8,7 @@
     </head>
 
     <body>
-        <div x-data="Data()" x-init="init">
+        <div x-data="Data()">
             <h1 x-text="Title"></h1>
             <h4 x-text="Content"></h4>
             <h5 x-html="XSS"></h5>
@@ -16,19 +16,55 @@
             <span @keydown.left="Left()">按左方Alert</span>
             <div :style="Blue">我是藍色</div>
             <div x-show="Show">預設顯示</div>
+
+            <div>
+                Input:
+                <div x-text="Num"></div>
+                    <input type="text" x-model.number="Num">
+                Checkbox:
+                <div x-text="JSON.stringify(Checkbox)"></div>
+                    <input type="checkbox" x-model="Checkbox" value="foo">
+                    <input type="checkbox" x-model="Checkbox" value="bar">
+                Radio:
+                <div x-text="JSON.stringify(Radio)"></div>
+                    <input type="radio" x-model="Radio" value="foo">
+                    <input type="radio" x-model="Radio" value="bar">
+                Select:
+                <div x-text="JSON.stringify(Select)"></div>
+                    <select x-model="Select">
+                        <option>foo</option>
+                        <option>bar</option>
+                    </select>
+                MultiSelect:
+                <div x-text="JSON.stringify(Multiselect)"></div>
+                    <select x-model="Multiselect" multiple>
+                        <option>foo</option>
+                        <option>bar</option>
+                    </select>
+            </div>
         </div>
         <script>
             function Data() {
                 return { 
+                    //Learn: https://www.cc.ntu.edu.tw/chinese/epaper/home/News_Content_n_103858_s_232976.html
                     Title: 'Alpine測試',
                     Content: '内文',
                     XSS: '<strong>含有HTML的内文</strong>',
-                    Refresh: () => {window.location.reload(true);},
-                    Left: () => {alert('按下左鍵')},
+                    Refresh() {window.location.reload(true);},
+                    Left() {alert('按下左鍵 << not effective :P')},
                     Blue: 'color:blue',
                     Show: true,
+
+                    //Learn: https://ithelp.ithome.com.tw/articles/10241403
+                    Num: 123,
+                    Checkbox: [],
+                    Radio: '',
+                    Select: '',
+                    Multiselect: [],
                     
-                    //Learn: https://www.cc.ntu.edu.tw/chinese/epaper/home/News_Content_n_103858_s_232976.html
+                    
+                    
+                    
                 }
             }
         </script>
